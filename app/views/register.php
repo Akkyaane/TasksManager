@@ -8,9 +8,9 @@
 <body>
     <div>
         <h2>Inscription</h2>
-        <form action="../controllers/UserController.php" method="POST">
-            <label for="name">Nom complet :</label>
-            <input type="text" id="name" name="name" required>
+        <form action="../controllers/UserController/" method="POST">
+            <label for="fullname">Nom complet :</label>
+            <input type="text" id="fullname" name="fullname" required>
 
             <label for="email">Email :</label>
             <input type="email" id="email" name="email" required>

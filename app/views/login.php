@@ -8,7 +8,7 @@
 <body>
     <div>
         <h2>Connexion</h2>
-        <form action="../controllers/UserController.php" method="POST">
+        <form action="../controllers/UserController/" method="POST">
             <label for="email">Email :</label>
             <input type="email" id="email" name="email" required>
             
