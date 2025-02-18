@@ -1,6 +1,9 @@
 <?php
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require('../models/User.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -23,13 +26,9 @@ class UserController {
         $created_at_str = $created_at->format('Y-m-d H:i:s:SSS');
 
         $user = new User();
-        $result = $user->create($username, $email, $password, $created_at_str);
+        $user->create($username, $email, $password, $created_at_str);
 
-        if($result == true) {
-            echo "Opération réussie. Utilisateur ajouté.";
-        } else {
-            echo "Opération échouée. Utilisateur non ajouté.";
-        }
+        $_SESSION['email'] = $email;
     }
 
     function login() {
@@ -40,11 +39,10 @@ class UserController {
         $result = $user->login($email);
 
         if (password_verify($password, $result[0]['password'])) {
-            echo "Opération réussie. Utilisateur connecté.";
             header('Location: ../../views/tasks.php');
-        } else {
-            echo "Opération échouée. Utilisateur non connecté.";
         }
+
+        $_SESSION['email'] = $email;
     }
 
     function logout() {

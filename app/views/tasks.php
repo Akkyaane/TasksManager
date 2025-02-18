@@ -1,3 +1,14 @@
+<?php
+
+require('../controllers/TaskController.php');
+require('../controllers/UserController.php');
+
+$taskController = new TaskController();
+$userController = new UserController();
+$tasks = $taskController->display();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,15 +27,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Test</td>
-                <td>Test</td>
-                <td>En cours</td>
-                <td><button>Supprimer</button></td>
-            </tr>
+            <?php foreach ($tasks as $task): ?>
+                <tr>
+                    <td><?= $task['title']; ?></td>
+                    <td><?= $task['description']; ?></td>
+                    <td><?= $task['status']; ?></td>
+                    <td>
+                        <button onclick="<? $taskController->update($task['id'])?>">Modifier</button>
+                        <button onclick="<? $taskController->delete($task['id'])?>">Supprimer</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
-    <button>Créer une tâche</button>
+
+    <button onclick="<? $taskController->create()?>">Créer une tâche</button>
+    <button onclick="<? $userController->logout()?>">Se déconnecter</button>
 </body>
 </html>
 

@@ -1,17 +1,11 @@
 <?php
 
-function connectToDatabase()
+function connect()
 {
-    try {
-        $dbh = new PDO('mysql:host=localhost;dbname=database', 'root', '');
-        echo "Connexion réussie.";
-        return $dbh;
-    } catch (PDOException $e) {
-        echo "Connexion échouée. Veuillez réesayer.";
-    }
+    return new PDO('mysql:host=localhost;dbname=database', 'root', '');
 }
 
-function disconnectFromDatabase()
+function disconnect()
 {
     //
 }

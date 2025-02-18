@@ -1,10 +1,10 @@
 <?php 
 
-require('../../config/database.php');
+require_once('../../config/database.php');
 
 class User {
     function create($username, $email, $password, $created_at_str) {
-        $connection = connectToDatabase();
+        $connection = connect();
         $sql = "INSERT INTO users (name, email, password, created_at) VALUES(?, ?, ?, ?)";
         $stmt = $connection->prepare($sql);
         $stmt->bindParam(1, $username);
@@ -16,13 +16,12 @@ class User {
     }
 
     function login($email) {
-        $connection = connectToDatabase();
+        $connection = connect();
         $sql = "SELECT email, password FROM users WHERE email = ?";
         $stmt = $connection->prepare($sql);
         $stmt->bindParam(1, $email);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($result);
         return $result;
     }
 }
